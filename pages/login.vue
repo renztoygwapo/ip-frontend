@@ -32,7 +32,7 @@
               class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500"
               :class="loading ? 'opacity-25 cursor-not-allowed' : 'text-white bg-theme-600 hover:bg-theme-700'"
               :disabled="loading || loading"
-              @click.prevent="handleOtp"
+              @click.prevent="login"
             >
               <pulse-loader v-if="loading" class="inline-flex" :btn-loading="loading" color="indigo" />
               <template v-else>

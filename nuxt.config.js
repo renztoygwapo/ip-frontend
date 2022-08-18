@@ -92,25 +92,6 @@ export default {
         tokenRequired: true,
         tokenType: 'Bearer'
       },
-      local2: {
-        scheme: 'local',
-        token: {
-          property: 'access_token',
-          maxAge: 90000,
-          global: true
-        },
-        user: {
-          property: '',
-          autoFetch: true
-        },
-        endpoints: {
-          login: { url: '/api/login-master', method: 'post' },
-          logout: { url: '/api/logout', method: 'post' },
-          user: { url: '/api/me', method: 'get' }
-        },
-        tokenRequired: true,
-        tokenType: 'Bearer'
-      }
     },
     fullPathRedirect: true
   },
