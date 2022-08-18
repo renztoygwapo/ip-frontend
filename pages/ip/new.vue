@@ -3,33 +3,7 @@
     <nav class="bg-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <div class="flex items-center">
-            <div class="flex-shrink-0 text-white">
-              IP Management
-            </div>
-            <div class="block">
-              <div class="ml-10 flex items-baseline space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <nuxt-link to="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">
-                  Dashboard
-                </nuxt-link>
-
-                <nuxt-link to="/log" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Activity Logs
-                </nuxt-link>
-                <button
-                  id="menu-item-3"
-                  type="button"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  role="menuitem"
-                  tabindex="-1"
-                  @click="$auth.logout()"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          </div>
+          <Header />
         </div>
       </div>
     </nav>
@@ -40,18 +14,36 @@
         </h1>
       </div>
     </header>
+    <Notification
+      :show="notification.show"
+      :title="notification.title"
+      :message="notification.message"
+      :type="notification.type"
+      @close="notification.show = false"
+    />
     <main>
       <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- Replace with your content -->
         <div class="px-4 py-6 sm:px-0">
           <div class="mt-5 md:mt-0 md:col-span-2">
-            <form autocomplete="off" @submit.prevent="doUpdate">
-              <div class="grid grid-cols-6 gap-6">
+            <form autocomplete="off" @submit.prevent="doSubmit">
+              <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-6 sm:col-span-6">
                   <label for="label" class="block text-sm font-medium text-gray-700">Label</label>
                   <input
                     id="label"
                     v-model="ips.label"
+                    type="text"
+                    name="label"
+                    autocomplete="off"
+                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  >
+                </div>
+                <div class="col-span-6 sm:col-span-6">
+                  <label for="label" class="block text-sm font-medium text-gray-700">IP Address</label>
+                  <input
+                    id="label"
+                    v-model="ips.ip"
                     type="text"
                     name="label"
                     autocomplete="off"
@@ -81,35 +73,23 @@ export default {
   data () {
     return {
       ips: {},
-      loading: false
+      loading: false,
+      notification: {
+        show: false,
+        message: '',
+        title: '',
+        type: 'success'
+      }
     }
   },
   fetch () {
     this.getIpById(this.$route.params.id)
   },
   methods: {
-    async getIpById (id) {
+    async doSubmit () {
       try {
         this.loading = true
-        const res = await this.$axios.get(`api/ip/${id}`)
-        this.ips = res.data
-      } catch (err) {
-        this.error = true
-        this.notifiable({
-          show: true,
-          type: 'error',
-          title: 'Sorry',
-          message: err.response.data.message
-        })
-        setTimeout(() => { this.error = false }, 3000)
-      } finally {
-        this.loading = false
-      }
-    },
-    async doUpdate () {
-      try {
-        this.loading = true
-        await this.$axios.put(`api/ip/${this.$route.params.id}`, { label: this.ips.label })
+        await this.$axios.post('api/ip', this.ips)
         this.$router.push('/')
       } catch (err) {
         this.error = true
@@ -123,6 +103,17 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    notifiable (props) {
+      this.notification = {
+        show: true,
+        title: props.title,
+        message: props.message,
+        type: props.type || 'success'
+      }
+      setTimeout(() => {
+        this.notification.show = false
+      }, 5000)
     }
   }
 }

@@ -16,7 +16,7 @@
           <div>
             <div class="isolate -space-y-px rounded-md shadow-sm">
               <div class="relative border border-gray-300 px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                <label for="email" class="block text-xs font-medium text-gray-700">Username</label>
+                <label for="email" class="block text-xs font-medium text-gray-700">Email Address</label>
                 <input id="email" v-model="form.email" type="text" name="username" class="block border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
               </div>
               <div class="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
