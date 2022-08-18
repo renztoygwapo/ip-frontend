@@ -10,9 +10,9 @@
             <div class="block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <nuxt-link to="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</nuxt-link>
+                <nuxt-link to="/" class="text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</nuxt-link>
 
-                <nuxt-link to="/log" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Activity Logs</nuxt-link>
+                <nuxt-link to="/log" class="bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Activity Logs</nuxt-link>
               </div>
             </div>
           </div>
@@ -23,7 +23,7 @@
     <header class="bg-white shadow">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl tracking-tight font-bold text-gray-900">
-          IP Address
+          Activity Log
         </h1>
       </div>
     </header>

@@ -7,18 +7,15 @@
       :type="notification.type"
       @close="notification.show = false"
     />
-    <NavigationDrawer />
     <Nuxt />
   </div>
 </template>
 
 <script>
-import NavigationDrawer from '~/components/NavigationDrawer.vue'
 import Notification from '@/components/Notification.vue'
 
 export default {
   components: {
-    NavigationDrawer,
     Notification
   },
   data () {

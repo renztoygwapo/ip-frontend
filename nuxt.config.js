@@ -91,7 +91,7 @@ export default {
         },
         tokenRequired: true,
         tokenType: 'Bearer'
-      },
+      }
     },
     fullPathRedirect: true
   },
